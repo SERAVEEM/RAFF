@@ -1,0 +1,158 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .slider {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgb(211, 216, 203);
+  }
+
+  .slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 2;
+    background: #dbdbdb;
+    overflow: hidden;
+    /* default to fully visible circular clip so circle transitions animate consistently */
+    clip-path: circle(150% at 50% 50%);
+  }
+
+  .slide.dark {
+    background: #000;
+  }
+
+  .slide-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+
+  .slide-content h1 {
+    font-family: "GR NORCH";
+    font-size: 20vw;
+    text-transform: uppercase;
+    font-weight: lighter;
+    color: #000;
+  }
+
+  .slide.dark .slide-content h1 {
+    color: #dbdbdb;
+  }
+
+  .slide-img {
+    position: absolute;
+    width: 250px;
+    height: 150vh;
+    filter: saturate(0);
+  }
+
+  .slide-img img {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 250px;
+    height: 600px;
+  }
+
+  .slide-img-1 {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-20deg);
+  }
+
+  .slide-img-2 {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(20deg);
+  }
+
+  /* Greeting hero styles */
+  .greeting-hero {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    background: linear-gradient(135deg, #1e1e1e 50%, #000 100%);
+    color: #fff;
+    flex-direction: column;
+    text-align: center;
+    pointer-events: auto;
+    /* initial full coverage via a large circle so we can animate a circular shrink from RAFF */
+    clip-path: circle(150% at 50% 50%);
+    overflow: hidden;
+  }
+
+  .greeting-text {
+    font-size: 4rem;
+    font-weight: 300;
+    text-align: center;
+    line-height: 1;
+    opacity: 1;
+  }
+
+  .greeting-hero .hint {
+    margin-top: 1rem;
+    font-size: 0.875rem;
+    opacity: 0;
+    transition: opacity 200ms ease;
+    color: rgba(255,255,255,0.85);
+  }
+
+  .greeting-hero.awaiting-dismiss .hint {
+    opacity: 1;
+  }
+
+  .greeting-hero.fade-out {
+    animation: fadeOut 240ms ease-in forwards;
+  }
+
+  @keyframes fadeOut {
+    from { opacity: 1; transform: translateY(0); }
+    to { opacity: 0; transform: translateY(-6px); }
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .fade-in-slow {
+    animation: fadeIn 1.5s ease-in-out forwards;
+  }
+
+  .fade-in-fast {
+    animation: fadeIn 0.08s linear forwards;
+  }
+
+  @media (max-width: 768px) {
+    .greeting-text {
+      font-size: 2.5rem;
+      padding: 1.5rem;
+    }
+  }
